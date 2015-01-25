@@ -10,8 +10,8 @@ def transactions
   transactions = []
   CSV.foreach(file_path) do |row|
     debtor = row[0]
-    amount = row[1].to_i
     creditors = row.drop(2)
+    amount = row[1].to_i / creditors.length
     creditors.each do |creditor|
       transactions << Transaction.new(debtor, creditor, amount)
     end
